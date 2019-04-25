@@ -4,10 +4,22 @@ const Posts = require('./db.js');
 
 const router = express.Router();
 
+app.post('/', function (req, res) {
+  res.send('POST request to the homepage')
+})
+
+app.get('/', (req, res) => {
+  res.send('GET request to the homepage')
+})
+
+
 router.get('/', async (req, res) => {
   try {
     const posts = await Posts.find();
-    res.status(200).json(posts);
+    res.status(200).json({
+      messageOfTheDay: process.env.MOTD,
+      posts
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -60,11 +72,11 @@ router.post('/', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  try{
+  try {
     const post = await Posts.remove(req.params.id);
     console.log(post);
-    if(post > 0){
-      res.status(200).json({message: "gone 4ever"})
+    if (post > 0) {
+      res.status(200).json({ message: "gone 4ever" })
     }
     else {
       res.status(404).json({ message: "post does not exist" });
@@ -83,8 +95,8 @@ router.put('/:id', async (req, res) => {
   } = req.body;
   if (title && contents) {
     try {
-      const post = await Posts.update(req.params.id, {title, contents});
-      if (post > 0){
+      const post = await Posts.update(req.params.id, { title, contents });
+      if (post > 0) {
         res.status(200).json(post);
       }
       else {
