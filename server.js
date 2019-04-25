@@ -8,7 +8,7 @@ server.use(express.json());
 
 server.get('/', (req, res) => {
   res.send(`
-  <h1>Posts yeeeet</h1>
+  
   `);
 });
 
