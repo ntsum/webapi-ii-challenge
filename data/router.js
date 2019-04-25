@@ -3,14 +3,13 @@ const express = require('express');
 const Posts = require('./db.js');
 
 const router = express.Router();
-router.use(helmet());
 router.use(express.json());
 
-app.post('/', function (req, res) {
+router.post('/', function (req, res) {
   res.send('POST request to the homepage')
 })
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   res.send('GET request to the homepage')
 })
 
