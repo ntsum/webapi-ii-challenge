@@ -3,6 +3,8 @@ const express = require('express');
 const Posts = require('./db.js');
 
 const router = express.Router();
+router.use(helmet());
+router.use(express.json());
 
 app.post('/', function (req, res) {
   res.send('POST request to the homepage')
@@ -18,7 +20,7 @@ router.get('/', async (req, res) => {
     const posts = await Posts.find();
     res.status(200).json({
       messageOfTheDay: process.env.MOTD,
-      posts
+      posts,
     });
   } catch (error) {
     console.log(error);
