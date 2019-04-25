@@ -5,14 +5,6 @@ const Posts = require('./db.js');
 const router = express.Router();
 router.use(express.json());
 
-router.post('/', function (req, res) {
-  res.send('POST request to the homepage')
-})
-
-router.get('/', (req, res) => {
-  res.send('GET request to the homepage')
-})
-
 
 router.get('/', async (req, res) => {
   try {
